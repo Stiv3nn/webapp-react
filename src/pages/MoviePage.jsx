@@ -1,25 +1,54 @@
+// IMPORTO AXIOS
+import axios from "axios";
+
+// USO DI STATE E EFFECT
+import { useState, useEffect } from "react";
+
 // IMPORTIAMO PARTE LINK DEL MODULO REACT-ROUTER
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // IMPPORT DEL COMPONENTE LISTATO
 import ReviewCard from "./../components/ReviewCard";
 
 const MoviePage = () => {
+  // RECUPERIAMO L'ID DEL FILM RICHIESTO
+  const { id } = useParams();
+
+  // SETTIAMO LO STATO DEL COMPNENTE
+  const [movie, setMovie] = useState({});
+
+  // FUNZIONE DI CHIAMATA ALL'API PER IL LIBRO RICHIESTO
+  const fetchMovies = () => {
+    axios
+      .get("http://localhost:3000/api/movies/" + id)
+      .then((res) => {
+        // console.log(res.data);
+        setMovie(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // CHIAMATA ALL'API AL MOnTAGGIO DEL COMPONENTE
+  useEffect(fetchMovies, []);
+
+  // FUNZIONE DI RENDERING DELLE REVIEWS
+  const renderReviews = () => {
+    return movie.reviews?.map((review) => (
+      <ReviewCard key={review.id} reviewProp={review} />
+    ));
+  };
+
   return (
     <>
       <header id="movie" className="border-bottom border-1 mb-3">
         <div className="d-flex mb-3">
-          <img
-            className="movie-img"
-            src="htpp://localhost:3000/img\movies\interstellar.jpg"
-            alt="descrizone img"
-          />
+          <img className="movie-img" src={movie.image} alt={movie.title} />
           <div>
-            <h1>Titolo movie</h1>
+            <h1>{movie.title}</h1>
             <h3 className="text-muted">
-              <i>Nome autore</i>
+              <i>{movie.director}</i>
             </h3>
-            <p>lorem ipsum</p>
+            <p>{movie.abstract}</p>
           </div>
         </div>
       </header>
@@ -31,11 +60,7 @@ const MoviePage = () => {
         </header>
 
         {/* LE REVIEWS SARANNO QUI */}
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
+        {renderReviews()}
       </section>
 
       <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">

@@ -1,11 +1,13 @@
-const ReviewCard = () => {
+const ReviewCard = ({ reviewProp }) => {
+  // DESTRUTURIAMO LA PROP
+  const { name, vote, text } = reviewProp;
   return (
     <div className="card mb-4">
       <div className="card-body">
-        <p className="card-text">Testo della recensione</p>
-        <strong>Vote: voto recensione</strong>
+        <p className="card-text">{text}</p>
+        <strong>{vote}</strong>
         <address>
-          <i>By nome del recensore</i>
+          <i>{name}</i>
         </address>
       </div>
     </div>
