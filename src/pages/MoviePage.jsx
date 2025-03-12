@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 // IMPORTIAMO PARTE LINK DEL MODULO REACT-ROUTER
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // IMPPORT DEL COMPONENTE LISTATO
 import ReviewCard from "./../components/ReviewCard";
@@ -14,6 +14,8 @@ const MoviePage = () => {
   // RECUPERIAMO L'ID DEL FILM RICHIESTO
   const { id } = useParams();
 
+  // UTILIZZO PER IL REDIRECT (useNavigate)
+  const redirect = useNavigate();
   // SETTIAMO LO STATO DEL COMPNENTE
   const [movie, setMovie] = useState({});
 
@@ -25,7 +27,10 @@ const MoviePage = () => {
         // console.log(res.data);
         setMovie(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        if (err.status === 404) redirect("/*");
+      });
   };
 
   // CHIAMATA ALL'API AL MOnTAGGIO DEL COMPONENTE

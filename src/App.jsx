@@ -1,6 +1,7 @@
 // IMPORTO LE PAGE CHE UTILIZZIAMO
 import HomePage from "./pages/HomePage";
 import MoviePage from "./pages/MoviePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 // IMPORTIAMO LAYOUT
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -16,6 +17,7 @@ function App() {
           {/* SONO LE NOSTRE 2 ROTTE PRINCIPALI PER LA NAVIGAZIONE DEI FILM */}
           <Route index path="/" element={<HomePage />} />
           <Route path="/movies/:id" element={<MoviePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
