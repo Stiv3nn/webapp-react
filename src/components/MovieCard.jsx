@@ -1,23 +1,21 @@
 // IMPORTIAMO PARTE LINK DEL MODULO REACT-ROUTER
 import { Link } from "react-router-dom";
 
-const MovieCard = () => {
+const MovieCard = ({ movieProp }) => {
+  const { id, title, director, genre, abstract, image } = movieProp;
   return (
     <div className="card mb-4">
-      <img
-        className="card-img-top"
-        src="htpp://localhost:3000/img\movies\interstellar.jpg"
-        alt="descrizone img"
-      />
+      <img className="card-img-top" src={image} alt={title} />
       <div className="card-body">
-        <h5 className="card-title"> Titolo del film </h5>
+        <h5 className="card-title"> {title} </h5>
         <address>
-          <i> By nome autore </i>
+          <i> By {director} </i>
         </address>
-        <p className="card-text"> Lorem ipsum lorem ipsum</p>
+        <p className="card-text"> {abstract} </p>
+        <p className="card-text"> {genre} </p>
 
         {/* BOTTONE PER MOSTRARE PIU' DETTAGLI PER FILM */}
-        <Link to="movies/2" className="btn btn-primary">
+        <Link to={`movies/${id}`} className="btn btn-primary">
           See more
         </Link>
       </div>
