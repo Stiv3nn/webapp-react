@@ -4,7 +4,7 @@ import axios from "axios";
 // USO DI STATE
 import { useState } from "react";
 
-const ReviewForm = ({ movie_id }) => {
+const ReviewForm = ({ movie_id, realoadReview }) => {
   const initialValue = { name: "", text: "", vote: 1 };
 
   // VARIABILE DI STATO PER INFO DEL FORM
@@ -26,7 +26,10 @@ const ReviewForm = ({ movie_id }) => {
       .post(urlEndpoint, formData, {
         headers: { "Content-Type": "application/json" },
       })
-      .then(setFormData(initialValue))
+      .then(() => {
+        setFormData(initialValue);
+        realoadReview();
+      })
       .catch((err) => console.log(err));
   };
 
