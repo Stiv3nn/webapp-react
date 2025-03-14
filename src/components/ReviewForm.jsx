@@ -28,7 +28,7 @@ const ReviewForm = ({ movie_id, realoadReview }) => {
       })
       .then(() => {
         setFormData(initialValue);
-        realoadReview();
+        realoadReviews();
       })
       .catch((err) => console.log(err));
   };
