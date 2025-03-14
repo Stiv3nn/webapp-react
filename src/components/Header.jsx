@@ -8,6 +8,10 @@ const Header = () => {
         <Link className="navbar-brand" to="/">
           Webapp-React
         </Link>
+        <Link className="btn btn-sm btn-secondary" to="/movies/create">
+          {" "}
+          Add movie
+        </Link>
       </div>
     </nav>
   );
