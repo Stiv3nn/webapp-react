@@ -24,7 +24,7 @@ const CreateMoviePage = () => {
     const { value, name } = e.target;
     if (name === "image")
       setFormDataOgj({ ...formDataOgj, image: e.target.files[0] });
-    else setFormDataOgj({ ...formDataOgja, [name]: value });
+    else setFormDataOgj({ ...formDataOgj, [name]: value });
   };
 
   const handleSubmit = () => {
